@@ -1,0 +1,2 @@
+My Self Krushang Balajiwala From surat 
+I append these line using append function in python

@@ -1,0 +1,23 @@
+print("hello world")
+print('hello world')
+print("hello \\\" world")
+
+print("""
+      hello
+      world
+      krushang
+      here
+      """)
+
+print("hello\b \ world")
+print("hello", end=" ")
+print("krushang")
+
+print("Java","python","C,C++",sep="|")
+
+name="Krushang"
+email="krushang@gmail.com"
+print("old: name is {} and email is {}".format(name,email)) 
+print(f"new: name is {name} and email is {email}")
+
+print(r"hello \\\\\\\" baby")
