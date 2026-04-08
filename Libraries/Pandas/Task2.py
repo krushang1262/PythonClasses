@@ -17,3 +17,15 @@ print(removeDup2,"\n")
 Shipment_Table = df[['ShipmentID','SPID','PID','GID','Shipdate','Amount','Boxes','Order_Status']]
 removeDup3 = Shipment_Table.drop_duplicates(subset=Shipment_Table).sort_values(by='ShipmentID', ascending=True)
 print(removeDup3)
+
+
+loction_s = Shipment_Table.groupby('GID')['Amount'].sum().reset_index()
+Report1 = pd.merge(removeDup1,loction_s,on="GID",how="inner")
+Report1 = Report1[['Geo','Amount']]
+print(Report1)
+
+
+
+
+
+
