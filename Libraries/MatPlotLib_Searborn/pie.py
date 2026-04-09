@@ -5,12 +5,11 @@ import seaborn as sbn
 
 df1 = pd.read_csv('~/Desktop/DataSheet/diamonds.csv')
 
-plt.boxplot(df1['price'])
-plt.show()
-
-sbn.boxplot(df1['price'])
-plt.show()
+# ct = df1['cut'].value_counts()
+# plt.pie(ct, labels=ct.index)
+# plt.show()
 
 df = df1.groupby('cut')['price'].sum().reset_index()
-sbn.boxplot(x='cut', y='price', data=df1, hue='cut')
+print(df)
+plt.pie(df['price'], labels=df['cut'])
 plt.show()
