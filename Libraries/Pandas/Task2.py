@@ -18,17 +18,18 @@ removeDup3 = Shipment_Table.drop_duplicates(subset=Shipment_Table).sort_values(b
 loction_s = Shipment_Table.groupby('GID')['Amount'].sum().reset_index()
 Report1 = pd.merge(removeDup1,loction_s,on="GID",how="inner")
 Report1 = Report1[['Geo','Amount']]
-# print(Report1)
+print(Report1)
 
 sales = Shipment_Table.groupby('PID')['Boxes'].median().reset_index()
 r1 = pd.merge(removeDup, sales, on='PID', how='inner')
 r1['Sales & Costing'] = r1['Boxes'] * r1['Cost_per_box']
-# print(r1,"\n")
+print(r1,"\n")
 
 topselling = removeDup.value_counts().head(5)
 print(topselling,"\n")
 
-Shipment_Table['Order_Status'] = Shipment_Table['Order_Status'].count()
-countOrderStatus = Shipment_Table['Order_Status'].reset_index()
-print(countOrderStatus)
+Shipment_Table['Order_Status'] = Shipment_Table['Order_Status']
+Shipment_Table['Order_Count'] = Shipment_Table['Order_Status'].count()
+dupRemove = Shipment_Table.drop_duplicates(subset='Order_Status')
+print(dupRemove)
 
