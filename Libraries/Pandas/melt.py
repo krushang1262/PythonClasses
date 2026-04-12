@@ -6,5 +6,5 @@ df = pd.DataFrame({
     'Sales': [100, 150, 200, 250]
 })
 
-x = pd.melt(df, id_vars='Name', var_name='Month', value_name='Sales')
+x = pd.melt(df, id_vars='Name', var_name='Month')
 print(x)
