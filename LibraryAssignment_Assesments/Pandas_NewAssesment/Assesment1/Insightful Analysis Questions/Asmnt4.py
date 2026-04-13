@@ -4,5 +4,5 @@ import pandas as pd
 
 df = pd.read_csv('~/Desktop/AssignmentData/finance_economics_dataset.csv')
 
-align = df['Corporate Profits (Billion USD)'].corr(df['Consumer Confidence Index'])
+align = df['Corporate Profits (Billion USD)'].align(df['Consumer Confidence Index'])
 print(align)
