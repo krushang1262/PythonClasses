@@ -4,5 +4,8 @@ import pandas as pd
 
 df = pd.read_csv('~/Desktop/AssignmentData/Retail Data.csv')
 
-x = df['Ship Mode'].corr(df['Shipping Cost'].min())
+df['Shipping Cost'] = df['Shipping Cost'].str.replace('$','',regex=False)
+df['Shipping Cost'] = pd.to_numeric(df['Shipping Cost'], errors='coerce')
+
+x = df.groupby('Ship Mode')['Shipping Cost'].mean()
 print(x)
