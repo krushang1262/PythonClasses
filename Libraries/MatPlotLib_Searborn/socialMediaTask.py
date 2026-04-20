@@ -9,7 +9,7 @@ df = pd.read_csv('~/Desktop/Task Data set/social_media_user_behavior.csv')
 # df.info()
 df.duplicated()
 
-# age group & relationship status wise education level count
+# # 1 age group & relationship status wise education level count
 
 agGrop = df.groupby(['education_level','relationship_status'])['age_group'].count().reset_index()
 print(agGrop)
@@ -19,7 +19,7 @@ plt.title('age group & relationship status wise education level count')
 plt.xticks(rotation=10)
 plt.show()
 
-# agegroup and relationship status wise avg num of primary_platform 
+# # 2 agegroup and relationship status wise avg num of primary_platform 
 
 avgPlatform = df.groupby(['age_group','relationship_status','primary_platform'])['num_platforms_used'].sum().reset_index()
 print(avgPlatform)
@@ -30,7 +30,7 @@ plt.title('agegroup and relationship status wise avg num of platform')
 plt.xticks(rotation=10)
 plt.show()
 
-# num_platforms_used and avg daily_screen_time_minutes
+# # 3 num_platforms_used and avg daily_screen_time_minutes
 
 rec = df.groupby('num_platforms_used')['daily_screen_time_minutes'].mean().reset_index()
 plt.figure(figsize=(10,6))
@@ -41,7 +41,7 @@ plt.ylabel('daily screen time')
 plt.xticks(rotation=10)
 plt.show()
 
-# use of primaryplatform to daily screen time
+# # 4 use of primaryplatform to daily screen time
 
 dta = df.groupby('primary_platform')[['daily_screen_time_minutes','avg_session_duration_minutes']].mean().reset_index()
 print(dta)
@@ -52,7 +52,7 @@ plt.xlabel('Primary platform')
 plt.ylabel('Daily screen time and average session duration mins')
 plt.show()
 
-# primary device preferred_content_type wise avg weekly_sessions
+# # 5 primary device preferred_content_type wise avg weekly_sessions
 
 prefCont = df.groupby(['primary_device','preferred_content_type'])['weekly_sessions'].mean().reset_index()
 print(prefCont)
@@ -61,7 +61,7 @@ plt.title('primary device preferred_content_type wise avg weekly_sessions')
 sbn.histplot(data=prefCont,x='weekly_sessions',hue='preferred_content_type',kde=True)
 plt.show()
 
-# Follwers Count and Following Count
+# # 6 Follwers Count and Following Count
 
 fcot = df.groupby('primary_platform')[['followers_count','following_count']].count().reset_index()
 print(fcot)
@@ -75,7 +75,7 @@ plt.title('Following Count')
 plt.pie(fcot['following_count'], labels=fcot['primary_platform'], autopct='%0.2f%%')
 plt.show()
 
-# sum of post per week, like per day, cmt per day, shares per week
+# # 7 sum of post per week, like per day, cmt per day, shares per week
 
 pstwk = df.groupby('primary_platform')[['posts_per_week','likes_per_day','comments_per_day','shares_per_week']].sum().reset_index()
 pstwk = pstwk.set_index('primary_platform')
@@ -85,7 +85,7 @@ plt.title('sum of post per week, like per day, cmt per day, shares per week')
 sbn.heatmap(pstwk, annot=True, cmap='Blues_r', fmt='d', linewidths=2)
 plt.show()
 
-# agg func Daily Notifications, Screen Time, Morning Phone Check with Primary Platform, Satisfaction, Productivity Impact
+# # 8 agg func Daily Notifications, Screen Time, Morning Phone Check with Primary Platform, Satisfaction, Productivity Impact
 pss = df.groupby(['primary_platform','platform_satisfaction','productivity_impact'])[['daily_notifications','uses_screen_time_limits','checks_phone_first_morning']].agg({'daily_notifications':'count','uses_screen_time_limits':'mean','checks_phone_first_morning':'max'})
 print(pss)
 
@@ -93,4 +93,23 @@ plt.figure(figsize=(10,6))
 sbn.barplot(pss, x='platform_satisfaction', y='daily_notifications', hue='productivity_impact')
 plt.title(' Daily Notifications, Screen Time, Morning Phone Check with Primary Platform, Satisfaction, Productivity Impact aggerate')
 plt.xticks(rotation=10)
+plt.show()
+
+# # 9 find the addiction of use of social media
+
+records = df.groupby(['user_id', 'primary_platform', 'age'])[['sleep_hours_per_night', 'addiction_level_1_to_10']].mean().reset_index().head(25)
+print(records)
+plt.figure(figsize=(10,6))
+plt.title('Addiction Level of Social Media Users', fontsize=14)
+
+sbn.barplot(
+    data=records,
+    x='user_id',
+    y='addiction_level_1_to_10',
+    palette='Set2',
+    hue='primary_platform'
+)
+plt.xlabel('User ID')
+plt.ylabel('Addiction Level')
+plt.xticks(rotation=45)
 plt.show()
