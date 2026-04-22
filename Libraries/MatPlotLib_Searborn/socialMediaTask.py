@@ -21,7 +21,7 @@ plt.show()
 
 # # 2 Average Number of Platforms Used 
 
-avgPlatform = df.groupby(['age_group','relationship_status','primary_platform'])['num_platforms_used'].mean().reset_index()
+avgPlatform = df.groupby(['age_group','relationship_status'])['num_platforms_used'].mean().reset_index()
 print(avgPlatform)
 
 plt.figure(figsize=(10,6))
