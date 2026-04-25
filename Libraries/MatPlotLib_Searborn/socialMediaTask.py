@@ -44,7 +44,7 @@ dt = followersfollowingCount.melt(id_vars='primary_platform',
 print(followersfollowingCount) 
 
 plt.figure(figsize=(10,6))
-plt.title("count followers platform they used")
+plt.title("count followers and following platform they used.")
 sbn.barplot(data=dt, x='primary_platform', y='count',hue='Type', palette='colorblind')
 plt.xlabel('Primary Platform')
 plt.ylabel('Count Followers')
