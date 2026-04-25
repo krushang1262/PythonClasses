@@ -22,7 +22,7 @@ plt.show()
 
 # 2  Max Screen time according to country and platfrom they use
 
-trackScreentime = df.groupby(['country','primary_platform'])['daily_screen_time_minutes'].max().reset_index().drop_duplicates().head(70)
+trackScreentime = df.groupby(['country','primary_platform'])['daily_screen_time_minutes'].mean().reset_index().drop_duplicates().head(70)
 print(trackScreentime)
 
 plt.figure(figsize=(10,6))
@@ -55,6 +55,7 @@ plt.show()
 # 4 avg addiction level according to platform user are used
 
 addLevel = df.groupby(['primary_platform'])['addiction_level_1_to_10'].mean().reset_index()
+addLevel = addLevel.sort_values(by='addiction_level_1_to_10',ascending=False)
 print(addLevel)
 
 plt.figure(figsize=(10,6))
