@@ -7,5 +7,16 @@ import seaborn as sbn
 
 df = pd.read_csv('~/Desktop/AssignmentData/U.S.Death.csv')
 
-noDeath = df.groupby(['year','cause']).size().reset_index(name='death')
+noDeath = df.groupby('cause_short').size().reset_index(name='death')
+noDeath = noDeath.sort_values(by='death', ascending=False)
 print(noDeath)
+
+plt.figure(figsize=(15,7))
+
+sbn.barplot(data=noDeath, x='death',y='cause_short')
+
+plt.title("Number of Deaths by Cause")
+plt.xlabel("Total Deaths")
+plt.ylabel("Cause")
+
+plt.show()
