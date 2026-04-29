@@ -10,7 +10,7 @@ dt = df.groupby(['year','state']).size().reset_index(name='yearly_death')
 print(dt)
 
 plt.figure(figsize=(12,6))
-sbn.lineplot(data=dt, x='year', y='yearly_death', hue='state')
+sbn.lineplot(data=dt, x='year', y='yearly_death')
 
 plt.title('Yearly Deaths in Different States')
 plt.xlabel('States')
