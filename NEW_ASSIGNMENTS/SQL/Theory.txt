@@ -1,0 +1,16 @@
+# 8) What is the significance of “%” and “_” operators in the LIKE statement? 
+--  % matches any number of characters, while _ matches exactly one character in a LIKE statement.
+
+# 9) Explain normalization in the context of databases. 
+-- Normalization is the process of organizing data in a database to reduce data duplication and improve data consistency.
+
+# 10) What does a join in MySQL mean?
+-- A JOIN in MySQL is used to combine data from two or more tables based on a related column between them.
+
+# 11) What do you understand about DDL, DCL, and DML in MySQL?
+-- DDL (Data Defination Language) ALter, Create, Drop, Truncate
+-- DCL (Data Control Language) Grant, Revoke
+-- DML (Data Manipulation Language) Insert, Update, Delete
+
+# 12) What is the role of the MySQL JOIN clause in a query, and what are some common types of joins? 
+-- Join clause connect the table to each other based on same column present's in a tables. INNER, LEFT, RIGHT, SELF, FULL JOIN.
