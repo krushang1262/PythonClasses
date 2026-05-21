@@ -6,3 +6,4 @@ if num < 0:
     print(f"number is negative {num}")
 else:
     print(f"Number is positive {num}")
+    
