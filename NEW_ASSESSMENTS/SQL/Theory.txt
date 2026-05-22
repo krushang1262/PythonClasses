@@ -1,0 +1,58 @@
+Section A: Concept Application
+
+1. What is the functional difference between SELECT * and specifying column names, and when is each preferred?
+-> SELECT * retrieves all columns from a table, while specifying column names retrieves only the required columns.
+Example:
+    SELECT * FROM Employees;
+    returns all columns.
+    SELECT Name, Salary FROM Employees;
+returns only Name and Salary.
+
+2. Which keyword renames a column in the output, and does this alias change the actual table structure in the database?
+-> The AS keyword is used to rename a column temporarily in the query output.
+Example:
+    SELECT Salary AS EmployeeSalary
+    FROM Employees;
+-> Here, EmployeeSalary is only an alias.
+-> No, the alias does not change the actual table structure or column name in the database.
+
+
+3. Why does wrapping a numeric value in quotes (e.g., '5000') in a WHERE clause create a data type conflict in SQL?
+-> Quotes represent a string data type, while numeric columns store numbers.
+
+Example:
+    SELECT *
+    FROM Employees
+    WHERE Salary = '5000';
+
+-> Here, '5000' is treated as a string instead of a number.
+
+Correct way:
+WHERE Salary = 5000;
+
+4. Contrast the results of ORDER BY Profit DESC versus ASC when the goal is to identify the top 10 most profitable orders.
+-> ORDER BY Profit DESC
+-> sorts profit from highest to lowest.
+-> This is used to find the top profitable orders.
+
+-> ORDER BY Profit ASC
+-> sorts profit from lowest to highest.
+
+-> To identify the top 10 profitable orders:
+    SELECT *
+    FROM Orders
+    ORDER BY Profit DESC
+    LIMIT 10;
+
+5. What is the T-SQL equivalent of the LIMIT clause in MS SQL Server, and why does syntax vary across SQL engines?
+-> The T-SQL equivalent of LIMIT in MS SQL Server is TOP.
+Example:
+    SELECT TOP 10 *
+    FROM Orders;
+
+6. Explain the logical execution order of a query containing SELECT, WHERE, ORDER BY, and LIMIT clauses.
+->    SELECT → chooses columns
+    FROM → selects the table
+    WHERE → filters rows
+    ORDER BY → sorts the result
+    LIMIT → restricts number of rows returned
