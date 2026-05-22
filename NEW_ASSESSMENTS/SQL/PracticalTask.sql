@@ -1,3 +1,5 @@
+-- Section B: Practical Task.
+
 use SqlAssessments;
 
 -- 1. Execute a query to retrieve the first 20 records from the orders table to verify data ingestion
