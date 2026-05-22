@@ -20,5 +20,3 @@ select * from superstore where Sales > 5000;
 
 -- 4.  Generate a report of the top 10 most profitable orders by sorting the records by Profit in descending order
 select * from superstore order by Profit desc limit 10;
-
-
