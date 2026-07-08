@@ -1,0 +1,67 @@
+1.) Compare the technical differences between Import and DirectQuery modes and identify which is suitable for a static CSV file.
+
+ANSWERS:
+| Feature        | Import Mode                                                | DirectQuery Mode                                                    |
+| -------------- | ---------------------------------------------------------- | ------------------------------------------------------------------- |
+| Data Storage   | Data is stored inside the Power BI file (.pbix).           | Data stays in the original database.                                |
+| Performance    | Very fast because data is already loaded.                  | Slower because every visual sends a query to the data source.       |
+| Refresh        | Needs scheduled or manual refresh to get new data.         | Shows live data from the source.                                    |
+| Data Source    | Works with Excel, CSV, SQL, etc.                           | Mainly used with databases like SQL Server, Oracle, Snowflake, etc. |
+| DAX & Features | Supports all DAX functions and Power BI features.          | Some DAX functions and modeling features have limitations.          |
+| File Size      | PBIX file becomes larger because data is stored inside it. | PBIX file stays smaller because data is not stored.                 |
+
+2.) Explain the consequence of a "Text" data type on a Card visual displaying
+sales and identify where in the workflow to correct this.
+
+ANSWERS:
+If the Sales column is stored as Text, 
+the Card visual cannot calculate the total sales 
+because text values cannot be added or aggregated.
+
+-> The Card visual may display an error.
+-> It may show "Can't summarize" or only display text instead of a total value.
+-> Calculations such as SUM, AVERAGE, or COUNT (for numeric analysis) will not work correctly.
+
+3.) Identify the specific menu or pane used to change a bar chart's sort order from alphabetical to descending by value.
+
+ANSWERS:
+    To change a bar chart's sort order from alphabetical to descending by value in Power BI:
+    Select the bar chart.
+->    Click the More options (⋯) icon in the top-right corner of the visual.
+->    Choose Sort by. 
+->   Select the value field (for example, Sales).
+->  Choose Descending.
+
+4.)Contrast filtering in Power Query versus using a visual-level "Top N" filter regarding their impact on other report visuals
+ANSWERS:
+
+| **Power Query Filter**                                             | **Visual-Level Top N Filter**                                                                               |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
+| Filters the data before it is loaded into Power BI.                | Filters only the selected visual after the data is loaded.                                                  |
+| The filtered-out data is removed from the dataset.                 | All data remains in the dataset.                                                                            |
+| Affects **all visuals** in the report because the data is removed. | Affects **only the selected visual**. Other visuals still show all data unless they have their own filters. |
+
+5.) Describe how to modify a bar chart or use a DAX measure to show a region's percentage of total sales instead of absolute values.
+
+ANSWERS:
+Method 1: Create a DAX Measure (Recommended)
+
+Create a measure:
+% of Total Sales =
+DIVIDE(
+    SUM(Sales[Sales]),
+    CALCULATE(SUM(Sales[Sales]), ALL(Sales[Region])),
+    0
+)
+
+-> Add this measure to the Values field of the bar chart.
+-> Format the measure as Percentage.
+-> Method 2: Modify the Visual
+-> Select the bar chart.
+-> Replace the Sales field in the Values section with the % of Total Sales measure.
+-> Turn on Data Labels if you want to display the percentages on the bars.
+
+6. Explain why hardcoded file paths cause shared PBIX files to break and how to make a report portable for other users.
+ANSWERS:
+Hardcoded file paths point to a specific location on one user's computer. 
+For example: C:\Users\Krushang\Documents\SalesData.csv
