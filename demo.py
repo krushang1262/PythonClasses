@@ -1,6 +1,7 @@
 import pandas as pd 
 import numpy as np
 
-amount  = [100, 120, 105, 110, 5000, 115, 108]
-print("average upi transaction (in ₹): ", np.mean(amount))
-print("median upi transaction (in ₹): ", np.median(amount))
+upi_amounts = [150, 2200, 80, 350, 120, 4500, 250, 180]
+
+print("Variance: ", np.var(upi_amounts),'\n')
+print("standard Deviations: ", np.std(upi_amounts))
