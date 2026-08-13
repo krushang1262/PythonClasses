@@ -1,17 +1,30 @@
-import pandas as pd 
-import matplotlib.pyplot as plt
-import numpy as np 
-
+import numpy as np
 import matplotlib.pyplot as plt
 
+# Set random seed
+np.random.seed(42)
 
-data = np.random.normal(loc=500,scale=100,size=1000)
-mean = np.mean(data)
-stdDev = np.std(data)
+# Number of samples
+num_samples = 1000
 
-print("mean: ",mean,'\n',"Standaed Deviations",stdDev)
+# Sample size
+sample_size = 30
 
-plt.hist(x=data, bins=30)
+# Generate sample means
+sample_means = []
+
+for i in range(num_samples):
+    sample = np.random.exponential(scale=10, size=sample_size)
+    sample_mean = np.mean(sample)
+    sample_means.append(sample_mean)
+
+# Plot histogram of sample means
+plt.figure(figsize=(10, 6))
+
+plt.hist(sample_means, bins=30)
+
+plt.title("Central Limit Theorem - Sampling Distribution of Mean")
+plt.xlabel("Sample Mean")
+plt.ylabel("Frequency")
+
 plt.show()
-
-
