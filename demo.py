@@ -1,30 +1,29 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.stats import norm
 
-# Set random seed
-np.random.seed(42)
+# Create Z values
+z = np.linspace(-4, 4, 1000)
 
-# Number of samples
-num_samples = 1000
+# Standard normal distribution
+y = norm.pdf(z, 0, 1)
 
-# Sample size
-sample_size = 30
+# Plot the curve
+plt.plot(z, y)
 
-# Generate sample means
-sample_means = []
+# Shade area between Z = -1 and Z = 1
+z_fill = np.linspace(-1, 1, 500)
+y_fill = norm.pdf(z_fill, 0, 1)
 
-for i in range(num_samples):
-    sample = np.random.exponential(scale=10, size=sample_size)
-    sample_mean = np.mean(sample)
-    sample_means.append(sample_mean)
+plt.fill_between(z_fill, y_fill, alpha=0.5)
 
-# Plot histogram of sample means
-plt.figure(figsize=(10, 6))
+# Add lines at Z = -1 and Z = 1
+plt.axvline(-1, linestyle='--')
+plt.axvline(1, linestyle='--')
 
-plt.hist(sample_means, bins=30)
-
-plt.title("Central Limit Theorem - Sampling Distribution of Mean")
-plt.xlabel("Sample Mean")
-plt.ylabel("Frequency")
+# Labels
+plt.xlabel("Z-score")
+plt.ylabel("Probability Density")
+plt.title("Standard Normal Distribution")
 
 plt.show()
