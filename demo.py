@@ -1,6 +1,15 @@
 import pandas as pd 
+from sklearn.linear_model import LinearRegression
 
-df1 = pd.read_csv('~/Desktop/gameAdd/gaming_addiction.csv')
-df = pd.DataFrame(df1)
-print("strongly positive corelation: ",df["Order_Value"].corr(df["Delivery_Distance"]))
-print("strongly positive corelation: ",df["Delivery_Charge"].corr(df["Delivery_Distance"]))
+df = pd.read_csv('~/Desktop/gameAdd/gaming_addiction.csv')
+
+X = df[['Ad_Spend_Lakhs']]
+y = df['Daily Order']
+
+model = LinearRegression()
+model.fit(X, y)
+
+# Calculate R-squared
+r_squared = model.score(X, y)
+
+print("R-squared:", r_squared)
