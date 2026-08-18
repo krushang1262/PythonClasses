@@ -1,15 +1,18 @@
 import pandas as pd 
-from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+import seaborn as sbn
 
-df = pd.read_csv('~/Desktop/gameAdd/gaming_addiction.csv')
+df1 = pd.read_csv('~/Desktop/gameAdd/gaming_addiction.csv')
+df = pd.DataFrame(df1)
+df2 = df.groupby('Month')[['App_Downloads', 'Ad_Spend_Lakhs']].sum().reset_index()
 
-X = df[['Ad_Spend_Lakhs']]
-y = df['Daily Order']
+print(df2)
 
-model = LinearRegression()
-model.fit(X, y)
+sbn.barplot(
+    data=df2,
+    x='Month',
+    y='Ad_Spend_Lakhs',
+    hue='App_Downloads'
+)
 
-# Calculate R-squared
-r_squared = model.score(X, y)
-
-print("R-squared:", r_squared)
+plt.show()
